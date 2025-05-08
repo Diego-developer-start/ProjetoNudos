@@ -1,0 +1,87 @@
+{
+  "users": [
+    {
+      "name": "Admin",
+      "email": "admin@sweetdonut.com",
+      "password": "$2b$10$YourHashedPasswordHere",
+      "role": "admin"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Donut de Chocolate",
+      "description": "Delicioso donut coberto com chocolate e granulado crocante",
+      "price": 6.00,
+      "image": "donut-chocolate.jpg",
+      "category": "tradicional"
+    },
+    {
+      "id": 2,
+      "name": "Donut de Morango",
+      "description": "Donut com cobertura de morango e confeitos coloridos",
+      "price": 7.00,
+      "image": "donut-morango.jpg",
+      "category": "frutas"
+    },
+    {
+      "id": 3,
+      "name": "Donut Glaceado",
+      "description": "Um donut clássico glaceado e polvilhado com açúcar",
+      "price": 5.50,
+      "image": "donut-glaceado.jpg",
+      "category": "tradicional"
+    },
+    {
+      "id": 4,
+      "name": "Donut de Caramelo",
+      "description": "Donut com cobertura de caramelo e uma pitada de sal",
+      "price": 6.50,
+      "image": "caramelo.jpg",
+      "category": "especial"
+    },
+    {
+      "id": 5,
+      "name": "Donut de Nutella",
+      "description": "Donut recheado com Nutella e coberto com avelãs",
+      "price": 8.00,
+      "image": "nutella.jpg",
+      "category": "especial"
+    },
+    {
+      "id": 6,
+      "name": "Donut de Baunilha",
+      "description": "Donut macio com cobertura de baunilha e confeitos",
+      "price": 6.50,
+      "image": "donut-baunilha.jpg",
+      "category": "tradicional"
+    }
+  ],
+  "stores": [
+    {
+      "id": 1,
+      "name": "Unidade Centro",
+      "address": "Av. Paulista, 1234, Centro, SP",
+      "hours": "8h - 20h",
+      "description": "Venha experimentar nossos donuts fresquinhos e deliciosos no coração da cidade!",
+      "image": "loja1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Unidade Jardins",
+      "address": "Rua Oscar Freire, 567, Jardins, SP",
+      "hours": "9h - 22h",
+      "description": "Uma unidade charmosa, perfeita para um lanche no meio da tarde.",
+      "image": "loja1.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Unidade Moema",
+      "address": "Av. Ibirapuera, 1010, Moema, SP",
+      "hours": "7h - 19h",
+      "description": "Nossa unidade em Moema é ideal para quem busca qualidade e conveniência.",
+      "image": "loja1.jpg"
+    }
+  ],
+  "orders": []
+} 

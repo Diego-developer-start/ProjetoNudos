@@ -1,0 +1,18 @@
+body {
+  background-color: #f8f9fa; /* Cor de fundo suave */
+}
+
+.card {
+  margin-bottom: 20px; /* Espaçamento entre os cartões */
+}
+
+.card-img-top {
+  height: 200px; /* Altura das imagens dos produtos */
+  object-fit: cover; /* Garante que as imagens não sejam distorcidas */
+}
+
+.price {
+  font-size: 1.25rem; /* Aumenta o tamanho do preço */
+  font-weight: bold; /* Torna o preço mais destacado */
+  color: #28a745; /* Cor verde para o preço */
+}

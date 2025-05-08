@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Donut Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .auth-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .auth-form input {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .auth-form button {
+            padding: 12px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .auth-form button:hover {
+            background: #ff5252;
+        }
+
+        .auth-toggle {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .auth-toggle a {
+            color: #ff6b6b;
+            text-decoration: none;
+        }
+
+        .error-message {
+            color: #ff0000;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+ </head>
+<body style="background: url('./imagens/logo.png') no-repeat center center fixed; background-size: 800px; background-repeat: no-repeat; background-position: center; background-color: #f8f9fa;">
+    <div class="auth-container">
+        <div id="login-form">
+            <h2>Login</h2>
+            <form class="auth-form" onsubmit="handleLogin(event)">
+                <input type="email" id="login-email" placeholder="Email" required>
+                <input type="password" id="login-password" placeholder="Senha" required>
+                <button type="submit">Entrar</button>
+            </form>
+            <div class="auth-toggle">
+                <p>Não tem uma conta? <a href="#" onclick="toggleForms()">Registre-se</a></p>
+            </div>
+        </div>
+
+        <div id="register-form" style="display: none;">
+            <h2>Registro</h2>
+            <form class="auth-form" onsubmit="handleRegister(event)">
+                <input type="text" id="register-name" placeholder="Nome completo" required>
+                <input type="email" id="register-email" placeholder="Email" required>
+                <input type="password" id="register-password" placeholder="Senha" required>
+                <button type="submit">Registrar</button>
+            </form>
+            <div class="auth-toggle">
+                <p>Já tem uma conta? <a href="#" onclick="toggleForms()">Faça login</a></p>
+            </div>
+        </div>
+        <div id="error-message" class="error-message"></div>
+    </div>
+
+    <script>
+        function toggleForms() {
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const errorMessage = document.getElementById('error-message');
+            
+            loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
+            registerForm.style.display = registerForm.style.display === 'none' ? 'block' : 'none';
+            errorMessage.textContent = '';
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            console.log('Tentando fazer login com:', email);
+            
+            try {
+                console.log('Enviando requisição para o servidor...');
+                const response = await fetch('http://localhost:3000/api/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                console.log('Resposta recebida:', response.status);
+                const data = await response.json();
+                console.log('Dados recebidos:', data);
+                
+                if (response.ok) {
+                    console.log('Login bem-sucedido, token recebido');
+                    localStorage.setItem('token', data.token);
+                    window.location.href = 'index.html';
+                } else {
+                    console.error('Erro no login:', data.message);
+                    document.getElementById('error-message').textContent = data.message;
+                }
+            } catch (error) {
+                console.error('Exceção capturada:', error);
+                document.getElementById('error-message').textContent = 'Erro ao fazer login. Tente novamente.';
+            }
+        }
+
+        async function handleRegister(event) {
+            event.preventDefault();
+            const name = document.getElementById('register-name').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+
+            try {
+                const response = await fetch('http://localhost:3000/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, password })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    localStorage.setItem('token', data.token);
+                    window.location.href = 'index.html';
+                } else {
+                    document.getElementById('error-message').textContent = data.message;
+                }
+            } catch (error) {
+                document.getElementById('error-message').textContent = 'Erro ao criar conta. Tente novamente.';
+            }
+        }
+    </script>
+</body>
+</html>

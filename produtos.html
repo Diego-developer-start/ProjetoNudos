@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="produtos.css" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Produtos - Sweet Donut</title>
+    <style>
+      .cart-icon {
+        position: relative;
+        cursor: pointer;
+      }
+      .cart-badge {
+        position: absolute;
+        margin-left: 70px;
+        background: #f47193;
+        color: white;
+        border-radius: 50%;
+        padding: 4px 8px;
+        font-size: 12px;
+      }
+      .cart-total-value {
+        font-weight: bold;
+        color: #000;
+      }
+      .quantity-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin: 10px 0;
+      }
+      .quantity-display {
+        min-width: 40px;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: bold;
+        padding: 5px 10px;
+        background-color: #f8f9fa;
+        border-radius: 4px;
+      }
+      .btn-outline-secondary {
+        border-color: #6c757d;
+        color: #6c757d;
+      }
+      .btn-outline-secondary:hover {
+        background-color: #6c757d;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="bg-light p-3 shadow-sm">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a href="index.html">
+          <img src="./imagens/logo.png" alt="Logo Sweet Donut" class="logo" />
+        </a>
+        <nav>
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="quemSomos.html">Quem Somos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="produtos.html">Produtos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="contato.html">Contato</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="unidades.html">Unidades</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark cart-icon" href="finalizarCompra.html">
+                🛒 Carrinho
+                <span class="cart-badge" id="cart-total">0</span>
+              </a>
+            </li>
+            <li class="nav-item auth-buttons">
+              <div class="user-info" id="user-info" style="display: none;">
+                <span id="user-name"></span>
+              </div>
+              <a class="nav-link" href="login.html" id="login-link">Entrar</a>
+              <a class="nav-link" href="#" id="logout-link" style="display: none;">Sair</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <div class="container mt-5">
+      <h1 class="text-center mb-4">Nossos Donuts</h1>
+      <div class="row">
+        <!-- Donut Chocolate -->
+        <div class="col-md-4 mb-4">
+          <div class="card" data-product-id="donut-chocolate">
+            <img
+              src="./imagens/donut-chocolate.jpg"
+              class="card-img-top"
+              alt="Donut de Chocolate"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Donut de Chocolate</h5>
+              <p class="card-text">
+                Delicioso donut coberto com chocolate e granulado crocante.
+              </p>
+              <p class="price" data-price="6.00">R$ 6,00</p>
+              <div class="quantity-controls">
+                <button class="btn btn-sm btn-danger" onclick="decrementQuantity('donut-chocolate')">-</button>
+                <input type="number" id="quantity-donut-chocolate" value="1" min="1" class="form-control text-center" style="width: 60px; display: inline-block;">
+                <button class="btn btn-sm btn-primary" onclick="incrementQuantity('donut-chocolate')">+</button>
+              </div>
+              <button class="btn btn-primary add-to-cart mt-2" onclick="addToCart('donut-chocolate')">
+                <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Donut Morango -->
+        <div class="col-md-4 mb-4">
+          <div class="card" data-product-id="donut-morango">
+            <img src="./imagens/donut-morango.jpg" class="card-img-top" alt="Donut de Morango" />
+            <div class="card-body">
+              <h5 class="card-title">Donut de Morango</h5>
+              <p class="card-text">Donut com cobertura de morango e confeitos coloridos.</p>
+              <p class="price" data-price="7.00">R$ 7,00</p>
+              <div class="quantity-controls">
+                <button class="btn btn-sm btn-danger" onclick="decrementQuantity('donut-morango')">-</button>
+                <input type="number" id="quantity-donut-morango" value="1" min="1" class="form-control text-center" style="width: 60px; display: inline-block;">
+                <button class="btn btn-sm btn-primary" onclick="incrementQuantity('donut-morango')">+</button>
+              </div>
+              <button class="btn btn-primary add-to-cart mt-2" onclick="addToCart('donut-morango')">
+                <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Donut Glaceado -->
+        <div class="col-md-4 mb-4">
+          <div class="card" data-product-id="donut-glaceado">
+            <img src="./imagens/donut-glaceado.jpg" class="card-img-top" alt="Donut Glaceado" />
+            <div class="card-body">
+              <h5 class="card-title">Donut Glaceado</h5>
+              <p class="card-text">Um donut clássico glaceado e polvilhado com açúcar.</p>
+              <p class="price" data-price="5.50">R$ 5,50</p>
+              <div class="quantity-controls">
+                <button class="btn btn-sm btn-danger" onclick="decrementQuantity('donut-glaceado')">-</button>
+                <input type="number" id="quantity-donut-glaceado" value="1" min="1" class="form-control text-center" style="width: 60px; display: inline-block;">
+                <button class="btn btn-sm btn-primary" onclick="incrementQuantity('donut-glaceado')">+</button>
+              </div>
+              <button class="btn btn-primary add-to-cart mt-2" onclick="addToCart('donut-glaceado')">
+                <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Donut Caramelo -->
+        <div class="col-md-4 mb-4">
+          <div class="card" data-product-id="donut-caramelo">
+            <img src="./imagens/caramelo.jpg" class="card-img-top" alt="Donut de Caramelo" />
+            <div class="card-body">
+              <h5 class="card-title">Donut de Caramelo</h5>
+              <p class="card-text">Donut com cobertura de caramelo e uma pitada de sal.</p>
+              <p class="price" data-price="6.50">R$ 6,50</p>
+              <div class="quantity-controls">
+                <button class="btn btn-sm btn-danger" onclick="decrementQuantity('donut-caramelo')">-</button>
+                <input type="number" id="quantity-donut-caramelo" value="1" min="1" class="form-control text-center" style="width: 60px; display: inline-block;">
+                <button class="btn btn-sm btn-primary" onclick="incrementQuantity('donut-caramelo')">+</button>
+              </div>
+              <button class="btn btn-primary add-to-cart mt-2" onclick="addToCart('donut-caramelo')">
+                <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Donut Nutella -->
+        <div class="col-md-4 mb-4">
+          <div class="card" data-product-id="donut-nutella">
+            <img src="./imagens/nutella.jpg" class="card-img-top" alt="Donut de Nutella" />
+            <div class="card-body">
+              <h5 class="card-title">Donut de Nutella</h5>
+              <p class="card-text">Donut recheado com Nutella e coberto com avelãs.</p>
+              <p class="price" data-price="8.00">R$ 8,00</p>
+              <div class="quantity-controls">
+                <button class="btn btn-sm btn-danger" onclick="decrementQuantity('donut-nutella')">-</button>
+                <input type="number" id="quantity-donut-nutella" value="1" min="1" class="form-control text-center" style="width: 60px; display: inline-block;">
+                <button class="btn btn-sm btn-primary" onclick="incrementQuantity('donut-nutella')">+</button>
+              </div>
+              <button class="btn btn-primary add-to-cart mt-2" onclick="addToCart('donut-nutella')">
+                <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Donut Baunilha -->
+        <div class="col-md-4 mb-4">
+          <div class="card" data-product-id="donut-baunilha">
+            <img src="./imagens/donut-baunilha.jpg" class="card-img-top" alt="Donut de Baunilha" />
+            <div class="card-body">
+              <h5 class="card-title">Donut de Baunilha</h5>
+              <p class="card-text">Donut macio com cobertura de baunilha e confeitos.</p>
+              <p class="price" data-price="6.50">R$ 6,50</p>
+              <div class="quantity-controls">
+                <button class="btn btn-sm btn-danger" onclick="decrementQuantity('donut-baunilha')">-</button>
+                <input type="number" id="quantity-donut-baunilha" value="1" min="1" class="form-control text-center" style="width: 60px; display: inline-block;">
+                <button class="btn btn-sm btn-primary" onclick="incrementQuantity('donut-baunilha')">+</button>
+              </div>
+              <button class="btn btn-primary add-to-cart mt-2" onclick="addToCart('donut-baunilha')">
+                <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-dark text-white py-4">
+      <div class="container text-center">
+        <p>&copy; 2024 Sweet Donut. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="cart.js"></script>
+    <script src="carrinho.js"></script>
+    <script>
+      // Verificar status de autenticação
+      async function checkAuth() {
+        const token = localStorage.getItem('token');
+        const loginLink = document.getElementById('login-link');
+        const logoutLink = document.getElementById('logout-link');
+        const userInfo = document.getElementById('user-info');
+        const userName = document.getElementById('user-name');
+
+        if (token) {
+          try {
+            const response = await fetch('http://localhost:3000/api/user', {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            });
+            
+            if (response.ok) {
+              const userData = await response.json();
+              userName.textContent = `Olá, ${userData.name}`;
+              userInfo.style.display = 'flex';
+              loginLink.style.display = 'none';
+              logoutLink.style.display = 'block';
+            } else {
+              localStorage.removeItem('token');
+              showLoginState();
+            }
+          } catch (error) {
+            console.error('Erro ao verificar autenticação:', error);
+            showLoginState();
+          }
+        } else {
+          showLoginState();
+        }
+      }
+
+      function showLoginState() {
+        const loginLink = document.getElementById('login-link');
+        const logoutLink = document.getElementById('logout-link');
+        const userInfo = document.getElementById('user-info');
+        
+        loginLink.style.display = 'block';
+        logoutLink.style.display = 'none';
+        userInfo.style.display = 'none';
+      }
+
+      // Manipular logout
+      document.getElementById('logout-link').addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        window.location.href = 'index.html';
+      });
+
+      // Função para adicionar ao carrinho
+      function addToCart(productId) {
+        // Pega a quantidade do input
+        const quantityInput = document.getElementById(`quantity-${productId}`);
+        const quantity = parseInt(quantityInput.value);
+        
+        if (isNaN(quantity) || quantity < 1) {
+          alert('Por favor, selecione uma quantidade válida');
+          return;
+        }
+
+        // Encontra o card do produto
+        const productCard = document.querySelector(`[data-product-id="${productId}"]`);
+        if (!productCard) {
+          console.error('Produto não encontrado:', productId);
+          return;
+        }
+
+        // Pega os dados do produto
+        const name = productCard.querySelector('.card-title').textContent;
+        const priceElement = productCard.querySelector('.price');
+        const price = parseFloat(priceElement.getAttribute('data-price'));
+
+        // Adiciona ao carrinho
+        cart.addItem(productId, quantity, name, price);
+        
+        // Resetar quantidade para 1 após adicionar
+        quantityInput.value = '1';
+
+        // Mostra mensagem de sucesso
+        alert('Produto adicionado ao carrinho!');
+      }
+
+      // Função para incrementar quantidade
+      function incrementQuantity(productId) {
+        const quantityInput = document.getElementById(`quantity-${productId}`);
+        const currentQuantity = parseInt(quantityInput.value);
+        quantityInput.value = currentQuantity + 1;
+      }
+
+      // Função para decrementar quantidade
+      function decrementQuantity(productId) {
+        const quantityInput = document.getElementById(`quantity-${productId}`);
+        const currentQuantity = parseInt(quantityInput.value);
+        if (currentQuantity > 1) {
+          quantityInput.value = currentQuantity - 1;
+        }
+      }
+
+      // Função para remover item do carrinho
+      function removeFromCart(productId) {
+        cart.removeItem(productId);
+      }
+
+      // Carregar produtos
+      async function loadProducts() {
+        try {
+          const response = await fetch('http://localhost:3000/api/products');
+          const products = await response.json();
+
+          const productsContainer = document.getElementById('products-container');
+          productsContainer.innerHTML = products.map(product => `
+            <div class="product-card">
+              <img src="${product.image}" alt="${product.name}" class="product-image">
+              <h3>${product.name}</h3>
+              <p class="price">R$ ${product.price.toFixed(2)}</p>
+              <div class="quantity-controls">
+                <button onclick="decrementQuantity('${product._id}')">-</button>
+                <span id="quantity-${product._id}">1</span>
+                <button onclick="incrementQuantity('${product._id}')">+</button>
+              </div>
+              <button class="add-to-cart" onclick="addToCart('${product._id}')">
+                <i class="fas fa-shopping-cart"></i> Adicionar ao Carrinho
+              </button>
+            </div>
+          `).join('');
+        } catch (error) {
+          console.error('Erro ao carregar produtos:', error);
+        }
+      }
+
+      // Carregar produtos quando a página carregar
+      document.addEventListener('DOMContentLoaded', loadProducts);
+
+      // Inicialização
+      document.addEventListener('DOMContentLoaded', function() {
+        checkAuth();
+        updateCartDisplay();
+      });
+    </script>
+  </body>
+</html>

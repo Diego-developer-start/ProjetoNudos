@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagens de Contato - Sweet Donut</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .message-card {
+            margin-bottom: 20px;
+        }
+        .message-header {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px 5px 0 0;
+        }
+        .message-body {
+            padding: 15px;
+            border: 1px solid #dee2e6;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Mensagens de Contato</h1>
+        <div id="messages-container"></div>
+    </div>
+
+    <script>
+        async function loadMessages() {
+            try {
+                const response = await fetch('http://localhost:3000/api/contact');
+                const messages = await response.json();
+                
+                const container = document.getElementById('messages-container');
+                container.innerHTML = '';
+
+                messages.forEach(message => {
+                    const date = new Date(message.createdAt).toLocaleString('pt-BR');
+                    const card = `
+                        <div class="card message-card">
+                            <div class="message-header">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h5 class="mb-0">${message.subject}</h5>
+                                    <small class="text-muted">${date}</small>
+                                </div>
+                                <div class="mt-2">
+                                    <strong>De:</strong> ${message.name} (${message.email})
+                                    <br>
+                                    <strong>Telefone:</strong> ${message.phone}
+                                </div>
+                            </div>
+                            <div class="message-body">
+                                <p class="mb-0">${message.message}</p>
+                            </div>
+                        </div>
+                    `;
+                    container.innerHTML += card;
+                });
+            } catch (error) {
+                console.error('Erro ao carregar mensagens:', error);
+                alert('Erro ao carregar mensagens. Tente novamente.');
+            }
+        }
+
+        // Carregar mensagens quando a página abrir
+        loadMessages();
+
+        // Atualizar a cada 30 segundos
+        setInterval(loadMessages, 30000);
+    </script>
+</body>
+</html> 

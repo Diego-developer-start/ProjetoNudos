@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <title>Sweet Donut - A Loja dos Melhores Donuts</title>
+  </head>
+
+  <body>
+    <header class="bg-light p-3 shadow-sm">
+      <div class="container d-flex justify-content-between align-items-center">
+        <a href="index.html">
+          <img src="./imagens/logo.png" alt="Logo Sweet Donut" class="logo" />
+        </a>
+        <nav>
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="quemSomos.html">Quem Somos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="produtos.html">Produtos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="contato.html">Contato</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="unidades.html">Unidades</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-dark cart-icon"
+                href="finalizarCompra.html"
+              >
+                🛒 Carrinho
+                <span class="cart-badge" id="cart-total">0</span>
+              </a>
+            </li>
+            <li class="nav-item auth-buttons">
+              <div class="user-info" id="user-info" style="display: none;">
+                <span id="user-name"></span>
+              </div>
+              <a class="nav-link" href="login.html" id="login-link">Entrar</a>
+              <a class="nav-link" href="#" id="logout-link" style="display: none;">Sair</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Banner vai ficar aqui , ele ta responsivo por causa do bootstrap-->
+
+    <section class="carousel-container">
+      <div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img
+              src="./imagens/banner01.jpg"
+              class="d-block w-100"
+              alt="Deliciosos donuts variados"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Deliciosos Donuts Variados</h5>
+              <p>Prove os nossos melhores sabores!</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./imagens/banner01.jpg"
+              class="d-block w-100"
+              alt="Donuts fresquinhos todos os dias"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Donuts Fresquinhos Todos os Dias</h5>
+              <p>Feitos com carinho e qualidade.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./imagens/banner01.jpg"
+              class="d-block w-100"
+              alt="Uma explosão de sabores"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Uma Explosão de Sabores</h5>
+              <p>Experimente algo novo em cada mordida.</p>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <img
+              src="./imagens/banner01.jpg"
+              class="d-block w-100"
+              alt="Promoções especiais"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>Promoções Especiais</h5>
+              <p>Ofertas imperdíveis para você!</p>
+            </div>
+          </div>
+        </div>
+        <button
+          class="carousel-control-prev"
+          type="button"
+          data-bs-target="#bannerCarousel"
+          data-bs-slide="prev"
+        >
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button
+          class="carousel-control-next"
+          type="button"
+          data-bs-target="#bannerCarousel"
+          data-bs-slide="next"
+        >
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </section>
+
+    <section class="sobre-nos py-5 bg-light">
+      <div class="container">
+        <div class="row g-4 align-items-center">
+          <div class="col-md-6">
+            <img
+              src="./imagens/logo.png"
+              alt="Imagem sobre nós"
+              class="img-fluid rounded"
+            />
+          </div>
+          <div class="col-md-6">
+            <h2 class="mb-3">Quem Somos</h2>
+            <p>
+              Na Sweet Donut, transformamos paixão por donuts em arte culinária.
+              Cada mordida é uma explosão de sabor, feita com os melhores
+              ingredientes e dedicação em cada detalhe.
+            </p>
+            <a href="quemSomos.html" class="btn mt-3">Saiba mais</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="produtos-destaque py-5">
+      <div class="container">
+        <h2 class="text-center mb-5">Nossos Destaques</h2>
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <div class="col">
+            <div class="card h-100 shadow-sm">
+              <img
+                src="./imagens/banner01.jpg"
+                class="card-img-top"
+                alt="Donut clássico"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Donut Clássico</h5>
+                <p class="card-text">
+                  Um clássico irresistível com cobertura de chocolate e
+                  granulado.
+                </p>
+                <a href="produtos.html" class="btn">Ver mais</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card h-100 shadow-sm">
+              <img
+                src="./imagens/banner01.jpg"
+                class="card-img-top"
+                alt="Donut recheado"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Donut Recheado</h5>
+                <p class="card-text">
+                  Sabor e cremosidade em cada mordida, recheado com creme
+                  especial.
+                </p>
+                <a href="produtos.html" class="btn">Ver mais</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="card h-100 shadow-sm">
+              <img
+                src="./imagens/banner01.jpg"
+                class="card-img-top"
+                alt="Donut com frutas"
+              />
+              <div class="card-body">
+                <h5 class="card-title">Donut com Frutas</h5>
+                <p class="card-text">
+                  Uma combinação perfeita de doce e frutas frescas.
+                </p>
+                <a href="produtos.html" class="btn">Ver mais</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-dark text-white py-4">
+      <div class="container text-center">
+        <p>&copy; 2024 Sweet Donut. Todos os direitos reservados.</p>
+        <p>
+          Siga-nos:
+          <a href="#" class="text-white mx-2">Instagram</a> |
+          <a href="#" class="text-white mx-2">Facebook</a> |
+          <a href="#" class="text-white mx-2">Twitter</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Verificar status de autenticação
+      async function checkAuth() {
+        const token = localStorage.getItem('token');
+        const loginLink = document.getElementById('login-link');
+        const logoutLink = document.getElementById('logout-link');
+        const userInfo = document.getElementById('user-info');
+        const userName = document.getElementById('user-name');
+
+        if (token) {
+          try {
+            // Decodificar o token para obter informações do usuário
+            const response = await fetch('http://localhost:3000/api/user', {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            });
+            
+            if (response.ok) {
+              const userData = await response.json();
+              userName.textContent = `Olá, ${userData.name}`;
+              userInfo.style.display = 'flex';
+              loginLink.style.display = 'none';
+              logoutLink.style.display = 'block';
+            } else {
+              // Se o token for inválido, limpa o localStorage
+              localStorage.removeItem('token');
+              showLoginState();
+            }
+          } catch (error) {
+            console.error('Erro ao verificar autenticação:', error);
+            showLoginState();
+          }
+        } else {
+          showLoginState();
+        }
+      }
+
+      function showLoginState() {
+        const loginLink = document.getElementById('login-link');
+        const logoutLink = document.getElementById('logout-link');
+        const userInfo = document.getElementById('user-info');
+        
+        loginLink.style.display = 'block';
+        logoutLink.style.display = 'none';
+        userInfo.style.display = 'none';
+      }
+
+      // Manipular logout
+      document.getElementById('logout-link').addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        window.location.href = 'index.html';
+      });
+
+      // Verificar status de autenticação ao carregar a página
+      checkAuth();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quem Somos - Sweet Donut</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="quemSomos.css" />
+  </head>
+  <body>
+    <header class="bg-light p-3 shadow-sm">
+      <div
+        class="ctn container d-flex justify-content-between align-items-center"
+      >
+        <a href="index.html">
+          <img src="./imagens/logo.png" alt="Logo Sweet Donut" class="logo" />
+        </a>
+        <nav>
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="quemSomos.html">Quem Somos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="produtos.html">Produtos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="contato.html">Contato</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-dark" href="unidades.html">Unidades</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link text-dark cart-icon"
+                href="finalizarCompra.html"
+              >
+                🛒 Carrinho
+                <span class="cart-badge" id="cart-total">0</span>
+              </a>
+            </li>
+            <li class="nav-item auth-buttons">
+              <div class="user-info" id="user-info" style="display: none;">
+                <span id="user-name"></span>
+              </div>
+              <a class="nav-link" href="login.html" id="login-link">Entrar</a>
+              <a class="nav-link" href="#" id="logout-link" style="display: none;">Sair</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <!-- Seção de Introdução -->
+    <section id="about-intro">
+      <h1>Quem Somos</h1>
+      <p>
+        O <strong>Sweet Donut</strong> nasceu da paixão por criar delícias que
+        encantam todos os sentidos. Nossa missão é adoçar a vida dos nossos
+        clientes com donuts artesanais, feitos com ingredientes selecionados e
+        muito amor. Cada donut é preparado com a dedicação e o carinho que
+        merecem, trazendo sabor e alegria em cada mordida.
+      </p>
+    </section>
+
+    <!-- Nossa História -->
+    <section id="about-history">
+      <h2>Nossa História</h2>
+      <p>
+        O Sweet Donut foi fundado por apaixonados por doces, que, após diversas
+        viagens e experiências, decidiram trazer o melhor do universo dos donuts
+        para nossa cidade. A nossa loja é resultado de muitos testes e receitas
+        até encontrar a combinação perfeita. Desde então, temos o compromisso de
+        levar sabores únicos e experiências inesquecíveis aos nossos clientes.
+      </p>
+    </section>
+
+    <!-- Compromisso com a Qualidade -->
+    <section id="about-quality">
+      <h2>Compromisso com a Qualidade</h2>
+      <p>
+        No Sweet Donut, prezamos pela qualidade acima de tudo. Utilizamos apenas
+        ingredientes frescos e selecionados, e todos os nossos produtos são
+        preparados de forma artesanal. Acreditamos que, ao cuidar de cada
+        detalhe, podemos proporcionar uma experiência gastronômica memorável
+        para cada cliente que visita nossa loja.
+      </p>
+    </section>
+
+    <!-- Nossos Valores -->
+    <section id="about-values">
+      <h2>Nossos Valores</h2>
+      <ul>
+        <li>
+          <strong>Qualidade</strong>: Em cada detalhe, do ingrediente ao
+          atendimento.
+        </li>
+        <li>
+          <strong>Inovação</strong>: Sempre trazendo novos sabores e ideias para
+          surpreender nossos clientes.
+        </li>
+        <li>
+          <strong>Alegria</strong>: Sabemos que os donuts trazem felicidade, e
+          queremos compartilhar isso com você.
+        </li>
+        <li>
+          <strong>Responsabilidade</strong>: Com nossa comunidade, clientes e
+          meio ambiente.
+        </li>
+      </ul>
+    </section>
+
+    <!-- Nossa Equipe -->
+    <section id="about-team">
+      <h2>Nossa Equipe</h2>
+      <p>
+        A equipe do Sweet Donut é formada por pessoas apaixonadas pela arte de
+        fazer donuts e por proporcionar momentos especiais para nossos clientes.
+        Desde a cozinha até o atendimento, cada um de nós está comprometido em
+        oferecer o melhor sabor e experiência. Venha nos conhecer e deixe-nos
+        adoçar o seu dia!
+      </p>
+    </section>
+
+    <!-- Galeria de Fotos -->
+    <section id="about-gallery">
+      <h2>Nossa Loja e Donuts</h2>
+      <div class="gallery">
+        <img src="imagens/img1.JPG" alt="Equipe do Sweet Donut" />
+        <img src="imagens/img2.JPG" alt="Donuts artesanais" />
+        <img src="imagens/img3.JPG" alt="Interior da loja" />
+      </div>
+    </section>
+
+    <!-- Convite para Visitar -->
+    <section id="about-visit">
+      <h2 class="h22">Venha nos Visitar!</h2>
+      <p>
+        Estamos ansiosos para receber você em nossa loja! Venha nos visitar e
+        experimente os melhores donuts da cidade, feitos com carinho e dedicação
+        para você. Estamos prontos para adoçar o seu dia!
+      </p>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Verificar status de autenticação
+      async function checkAuth() {
+        const token = localStorage.getItem('token');
+        const loginLink = document.getElementById('login-link');
+        const logoutLink = document.getElementById('logout-link');
+        const userInfo = document.getElementById('user-info');
+        const userName = document.getElementById('user-name');
+
+        if (token) {
+          try {
+            // Decodificar o token para obter informações do usuário
+            const response = await fetch('http://localhost:3000/api/user', {
+              headers: {
+                'Authorization': `Bearer ${token}`
+              }
+            });
+            
+            if (response.ok) {
+              const userData = await response.json();
+              userName.textContent = `Olá, ${userData.name}`;
+              userInfo.style.display = 'flex';
+              loginLink.style.display = 'none';
+              logoutLink.style.display = 'block';
+            } else {
+              // Se o token for inválido, limpa o localStorage
+              localStorage.removeItem('token');
+              showLoginState();
+            }
+          } catch (error) {
+            console.error('Erro ao verificar autenticação:', error);
+            showLoginState();
+          }
+        } else {
+          showLoginState();
+        }
+      }
+
+      function showLoginState() {
+        const loginLink = document.getElementById('login-link');
+        const logoutLink = document.getElementById('logout-link');
+        const userInfo = document.getElementById('user-info');
+        
+        loginLink.style.display = 'block';
+        logoutLink.style.display = 'none';
+        userInfo.style.display = 'none';
+      }
+
+      // Manipular logout
+      document.getElementById('logout-link').addEventListener('click', (e) => {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        window.location.href = 'index.html';
+      });
+
+      // Verificar status de autenticação ao carregar a página
+      checkAuth();
+    </script>
+  </body>
+</html>
