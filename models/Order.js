@@ -38,8 +38,8 @@ const orderSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['pending', 'processing', 'completed', 'cancelled'],
-        default: 'pending'
+        enum: ['pendente', 'em andamento', 'concluído', 'cancelado'],
+        default: 'pendente'
     }
 }, { timestamps: true });
 

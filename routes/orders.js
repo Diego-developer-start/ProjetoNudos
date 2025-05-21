@@ -21,17 +21,18 @@ router.post('/', auth, async (req, res) => {
         if (!address || typeof address !== 'object') {
             return res.status(400).json({ message: 'Endereço é obrigatório e deve ser um objeto' });
         }
-        // Ajuste para aceitar tanto 'rua' quanto 'street', 'numero' quanto 'number', etc.
-        const rua = address.rua || address.street;
-        const numero = address.numero || address.number;
-        const bairro = address.bairro || address.neighborhood;
-        const cidade = address.cidade || address.city;
-        const estado = address.estado || address.state;
+        // Padroniza os campos do endereço para os nomes usados no frontend
+        const street = address.street;
+        const number = address.number;
+        const neighborhood = address.neighborhood;
+        const city = address.city;
+        const state = address.state;
         const cep = address.cep;
-        const complemento = address.complemento || address.complement;
+        const complement = address.complement;
+        const instructions = address.instructions;
 
-        if (!rua || !numero || !bairro || !cidade || !estado || !cep) {
-            return res.status(400).json({ message: 'Todos os campos de endereço (rua, número, bairro, cidade, estado, cep) são obrigatórios' });
+        if (!street || !number || !neighborhood || !city || !state || !cep) {
+            return res.status(400).json({ message: 'Todos os campos de endereço (street, number, neighborhood, city, state, cep) são obrigatórios' });
         }
 
         // Criar o pedido
@@ -40,25 +41,62 @@ router.post('/', auth, async (req, res) => {
             products,
             total,
             address: {
-                rua,
-                numero,
-                bairro,
-                cidade,
-                estado,
+                street,
+                number,
+                neighborhood,
+                city,
+                state,
                 cep,
-                complemento
+                complement,
+                instructions
             }
         });
 
         // Salvar o pedido
         await order.save();
 
+        // Populando as informações do pedido
+        const populatedOrder = await Order.findById(order._id)
+            .populate('user', 'name email')
+            .populate('products.product', 'name price');
+
+        // Exibindo informações detalhadas no console
+        console.log('\n' + '='.repeat(50));
+        console.log('📦 Pedido Criado com Sucesso!');
+        console.log('👤 Cliente:', populatedOrder.user.name, `<${populatedOrder.user.email}>`);
+        
+        console.log('\n📍 Endereço de Entrega:');
+        console.log(`  Rua: ${populatedOrder.address.street}, Nº: ${populatedOrder.address.number}`);
+        console.log(`  Bairro: ${populatedOrder.address.neighborhood}`);
+        console.log(`  Cidade: ${populatedOrder.address.city} - ${populatedOrder.address.state}`);
+        console.log(`  CEP: ${populatedOrder.address.cep}`);
+        if (populatedOrder.address.complement) {
+            console.log(`  Complemento: ${populatedOrder.address.complement}`);
+        }
+
+        console.log('\n🛒 Itens do Pedido:');
+        populatedOrder.products.forEach((item, index) => {
+            const nome = item.product?.name || 'Produto desconhecido';
+            const preco = item.product?.price || 0;
+            const subtotal = preco * item.quantity;
+            console.log(`  ${index + 1}. ${nome}`);
+            console.log(`     Quantidade: ${item.quantity}`);
+            console.log(`     Preço unitário: R$ ${preco.toFixed(2)}`);
+            console.log(`     Subtotal: R$ ${subtotal.toFixed(2)}`);
+        });
+
+        console.log('\n💰 Total do Pedido: R$ ' + populatedOrder.total.toFixed(2));
+        console.log('📦 Status: ' + populatedOrder.status);
+        console.log('🕒 Criado em: ' + new Date(populatedOrder.createdAt).toLocaleString());
+        console.log('='.repeat(50) + '\n');
+
+        // Retornar a resposta com as informações detalhadas
         res.status(201).json({
             message: 'Pedido criado com sucesso',
-            order
+            order: populatedOrder
         });
     } catch (error) {
-        console.error('Erro ao criar pedido:', error);
+        console.error('❌ Erro ao criar pedido:', error);
         res.status(500).json({ message: 'Erro ao criar pedido' });
     }
 });
@@ -71,7 +109,7 @@ router.get('/my-orders', auth, async (req, res) => {
             .sort({ createdAt: -1 });
         res.json(orders);
     } catch (error) {
-        console.error('Erro ao buscar pedidos:', error);
+        console.error('❌ Erro ao buscar pedidos:', error);
         res.status(500).json({ message: 'Erro ao buscar pedidos' });
     }
 });
